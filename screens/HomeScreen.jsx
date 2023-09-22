@@ -16,8 +16,9 @@ export default function HomeScreen({ navigation }) {
       counters.forEach((counter) => {
         getCounterActivitiesValue(counter.id, selectedTab).then(
           (activities) => {
+            console.log(activities);
             let total = 0;
-            activities.forEach((activity) => {
+            activities?.forEach((activity) => {
               total += activity.value;
             });
             counter.value = total;

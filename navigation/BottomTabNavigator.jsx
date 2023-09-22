@@ -12,8 +12,10 @@ import ProfileScreen from "../screens/ProfileScreen";
 
 import { Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 import PickerScreen from "../screens/PickerScreen";
 import AddCounterScreen from "../screens/AddCounterScreen";
+import ChatScreen from "../screens/ChatScreen";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -69,6 +71,11 @@ function HomeNavigator() {
         }}
         name="AddCounterScreen"
         component={AddCounterScreen}
+      />
+      <HomeStack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={{ headerTitle: "Chat", presentation: "modal" }}
       />
     </HomeStack.Navigator>
   );

@@ -1,7 +1,10 @@
-import { View, Text, Button, StyleSheet, FlatList } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
+
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Tab } from "../components/ui";
+import Icon from "react-native-vector-icons/FontAwesome5";
+
 import { getCounterActivitiesValue, getCounterActivities } from "../lib/api";
 
 export default function DetailItemScreen(props) {
@@ -45,40 +48,72 @@ export default function DetailItemScreen(props) {
         ]}
       />
       <View style={styles.container}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: "bold",
-            marginTop: 10,
-            color: "gray",
-          }}
-        >
-          TOTAL
-        </Text>
         <View
           style={{
             flexDirection: "row",
-            gap: 10,
-            alignItems: "flex-end",
-            padding: 4,
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: 8,
           }}
         >
-          <Text
-            style={{
-              fontSize: 32,
-              fontWeight: "bold",
-              color: "black",
-            }}
+          <View>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                marginTop: 10,
+                color: "gray",
+              }}
+            >
+              TOTAL
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 10,
+                alignItems: "flex-end",
+                padding: 4,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 32,
+                  fontWeight: "bold",
+                  color: "black",
+                }}
+              >
+                {activitiesVal}
+              </Text>
+              <Text
+                style={{
+                  marginBottom: 6,
+                }}
+              >
+                {item.unit}
+              </Text>
+            </View>
+          </View>
+          <Icon.Button
+            backgroundColor={"#0584FF"}
+            color={"#fff"}
+            name="comment-alt"
+            onPress={() =>
+              navigation.navigate("ChatScreen", {
+                counter: item,
+                allActivities: allActivities,
+              })
+            }
           >
-            {activitiesVal}
-          </Text>
-          <Text
-            style={{
-              marginBottom: 6,
-            }}
-          >
-            {item.unit}
-          </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              Chat
+            </Text>
+          </Icon.Button>
         </View>
       </View>
       <View
@@ -98,7 +133,7 @@ export default function DetailItemScreen(props) {
         </Text>
         <FlatList
           style={{ flex: 1 }}
-          data={allActivities}
+          data={allActivities || []}
           renderItem={({ item }) => {
             return (
               <View
